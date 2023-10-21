@@ -14,6 +14,7 @@ router.post('/', async(req, res) => {
 
     })
     try {
+        //CARA PERTAMA
         const dosen = await dataDosen.save()
         res.json(dosen)
     } catch (error) {
@@ -21,4 +22,20 @@ router.post('/', async(req, res) => {
     }
 })
 
+router.get('/', async(req, res) => {
+    try {
+        //CARA KEDUA
+        const dosen = await Dosen.find().populate({
+            path: 'prodi',
+            select:'_id nama',
+            populate: {
+                path: 'fakultas',
+                select: '_id nama'
+            }
+        }).exec()
+        res.json(dosen)
+    } catch (error) {
+        res.json({message: error})
+    }
+})
 module.exports = router
