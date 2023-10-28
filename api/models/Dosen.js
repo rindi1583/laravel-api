@@ -5,7 +5,7 @@ const DosenSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    nama: {
+    npm: {
         type: String,
         required: true
     },
